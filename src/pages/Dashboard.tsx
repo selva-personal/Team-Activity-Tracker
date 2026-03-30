@@ -36,6 +36,7 @@ import {
   ResponsiveContainer,
 } from 'recharts';
 import { format, startOfWeek, addDays } from 'date-fns';
+import { APP_DASHBOARD_TITLE, APP_DASHBOARD_SUBTITLE } from '@/config/appConfig';
 
 export const Dashboard: React.FC = () => {
   const { data: stats, isLoading: statsLoading } = useGetDashboardStatsQuery();
@@ -329,8 +330,12 @@ export const Dashboard: React.FC = () => {
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">Dashboard</h1>
-        <p className="text-gray-600 dark:text-gray-400">Overview of team activity and productivity</p>
+        <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">
+          {APP_DASHBOARD_TITLE}
+        </h1>
+        <p className="text-gray-600 dark:text-gray-400">
+          {APP_DASHBOARD_SUBTITLE}
+        </p>
       </div>
 
       {/* KPI Cards */}

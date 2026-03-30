@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useAppDispatch } from '@/store/hooks';
 import { login } from '@/store/slices/authSlice';
 import { Mail, Lock, Eye, EyeOff, Stethoscope } from 'lucide-react';
+import { APP_LOGIN_TITLE, APP_LOGIN_SUBTITLE } from '@/config/appConfig';
 
 export const Login: React.FC = () => {
   const navigate = useNavigate();
@@ -58,9 +59,11 @@ export const Login: React.FC = () => {
               <div className="h-14 w-14 rounded-2xl bg-gradient-to-br from-blue-500 to-emerald-500 flex items-center justify-center mb-4 shadow-lg shadow-blue-500/30">
                 <Stethoscope size={28} className="text-white" />
               </div>
-              <h1 className="text-2xl sm:text-3xl font-bold text-white mb-2">Welcome</h1>
+              <h1 className="text-2xl sm:text-3xl font-bold text-white mb-2">
+                {APP_LOGIN_TITLE}
+              </h1>
               <p className="text-sm text-gray-400 text-center">
-                Access your productivity dashboard
+                {APP_LOGIN_SUBTITLE}
               </p>
             </div>
 

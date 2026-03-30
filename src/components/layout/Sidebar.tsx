@@ -2,6 +2,7 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import clsx from 'clsx';
 import { useSidebar } from '@/contexts/SidebarContext';
+import { APP_NAME, APP_SIDEBAR_TAGLINE, APP_FOOTER_TEXT } from '@/config/appConfig';
 import {
   LayoutDashboard,
   Users,
@@ -44,7 +45,14 @@ export const Sidebar: React.FC = () => {
         <div className="p-4 border-b border-gray-200 dark:border-gray-700">
           <div className="flex items-center justify-between">
             {!collapsed && (
-              <h1 className="text-xl font-bold text-blue-600 dark:text-blue-400">HealthOps</h1>
+              <div>
+                <h1 className="text-xl font-bold text-blue-600 dark:text-blue-400">
+                  {APP_NAME}
+                </h1>
+                <p className="text-xs text-gray-500 dark:text-gray-400 mt-0.5">
+                  {APP_SIDEBAR_TAGLINE}
+                </p>
+              </div>
             )}
             <button
               onClick={() => setCollapsed(!collapsed)}
@@ -94,7 +102,7 @@ export const Sidebar: React.FC = () => {
         {!collapsed && (
           <div className="p-4 border-t border-gray-200 dark:border-gray-700">
             <p className="text-xs text-gray-500 dark:text-gray-400 text-center">
-              © 2026 HealthOps Dashboard
+              {APP_FOOTER_TEXT}
             </p>
           </div>
         )}

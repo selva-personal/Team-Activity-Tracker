@@ -13,6 +13,7 @@ import type {
   ProjectReportData,
   DailyReportData,
 } from '@/types';
+import { APP_REPORTS_TITLE } from '@/config/appConfig';
 
 type ReportType = 'team' | 'employee' | 'project' | 'daily';
 
@@ -162,7 +163,12 @@ export const Reports: React.FC = () => {
   return (
     <div className="h-full flex flex-col gap-6">
       <div>
-        <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">Reports</h1>
+        <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-1">
+          {APP_REPORTS_TITLE}
+        </h1>
+        <p className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5">
+          Vigilon – AI-Based Employee Activity Monitoring & Face Recognition System
+        </p>
         <p className="text-gray-600 dark:text-gray-400">
           Run detailed analytics reports for teams, employees, projects, and daily activity.
         </p>

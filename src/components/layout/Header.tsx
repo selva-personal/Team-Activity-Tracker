@@ -17,6 +17,7 @@ import {
   User,
   X,
 } from 'lucide-react';
+import { APP_NAME, APP_SUBTITLE } from '@/config/appConfig';
 
 export const Header: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -67,7 +68,15 @@ export const Header: React.FC = () => {
   return (
     <header className="sticky top-0 z-30 bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-700 shadow-sm">
       <div className="flex items-center justify-between px-6 py-4">
-        <div className="flex items-center gap-4 flex-1 max-w-2xl">
+        <div className="flex items-center gap-6 flex-1 max-w-2xl">
+          <div className="hidden md:flex flex-col">
+            <span className="text-lg font-semibold text-gray-900 dark:text-white tracking-tight">
+              {APP_NAME}
+            </span>
+            <span className="text-xs text-gray-500 dark:text-gray-400">
+              {APP_SUBTITLE}
+            </span>
+          </div>
           <div className="relative flex-1">
             <Search
               size={20}
