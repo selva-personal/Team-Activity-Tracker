@@ -10,6 +10,7 @@ import { Reports } from '@/pages/Reports';
 import { Settings } from '@/pages/Settings';
 import { Profile } from '@/pages/Profile';
 import { Login } from '@/pages/Login';
+import { DeveloperProductivity } from '@/pages/DeveloperProductivity';
 import { ProtectedRoute } from '@/components/routing/ProtectedRoute';
 
 function App() {
@@ -65,6 +66,14 @@ function App() {
               element={
                 <ProtectedRoute>
                   <Reports />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/developer-productivity/*"
+              element={
+                <ProtectedRoute>
+                  <DeveloperProductivity />
                 </ProtectedRoute>
               }
             />

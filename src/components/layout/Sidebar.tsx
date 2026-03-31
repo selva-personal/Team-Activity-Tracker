@@ -1,5 +1,5 @@
-import React from 'react';
-import { NavLink } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { NavLink, useLocation } from 'react-router-dom';
 import clsx from 'clsx';
 import { useSidebar } from '@/contexts/SidebarContext';
 import { APP_NAME, APP_SIDEBAR_TAGLINE, APP_FOOTER_TEXT } from '@/config/appConfig';
@@ -13,6 +13,9 @@ import {
   Settings,
   ChevronLeft,
   ChevronRight,
+  ChevronDown,
+  ChevronUp,
+  Gauge,
 } from 'lucide-react';
 
 interface MenuItem {
@@ -33,6 +36,15 @@ const menuItems: MenuItem[] = [
 
 export const Sidebar: React.FC = () => {
   const { collapsed, setCollapsed } = useSidebar();
+  const location = useLocation();
+  const isDeveloperRoute = location.pathname.startsWith('/developer-productivity');
+  const [isDeveloperMenuOpen, setIsDeveloperMenuOpen] = useState(isDeveloperRoute);
+
+  useEffect(() => {
+    if (isDeveloperRoute) {
+      setIsDeveloperMenuOpen(true);
+    }
+  }, [isDeveloperRoute]);
 
   return (
     <div
@@ -97,6 +109,76 @@ export const Sidebar: React.FC = () => {
               )}
             </NavLink>
           ))}
+
+          {/* Developer Productivity module */}
+          <div className="mt-4">
+            <button
+              type="button"
+              onClick={() => {
+                if (!collapsed) {
+                  setIsDeveloperMenuOpen((prev) => !prev);
+                }
+              }}
+              className={clsx(
+                'w-full px-4 py-2 mb-1 flex items-center gap-3 text-sm font-semibold rounded-lg transition-colors',
+                collapsed ? 'justify-center px-0' : 'justify-between',
+                isDeveloperRoute
+                  ? 'bg-indigo-50 text-indigo-700 dark:bg-indigo-900/30 dark:text-indigo-300'
+                  : 'text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800',
+              )}
+              title={collapsed ? 'Developer Productivity' : undefined}
+            >
+              <div className="flex items-center gap-3">
+                <Gauge
+                  size={18}
+                  className={clsx(
+                    isDeveloperRoute
+                      ? 'text-indigo-700 dark:text-indigo-300'
+                      : 'text-indigo-600 dark:text-indigo-400',
+                  )}
+                />
+                {!collapsed && (
+                  <span className="text-xs font-semibold whitespace-nowrap">
+                    Developer Productivity
+                  </span>
+                )}
+              </div>
+              {!collapsed &&
+                (isDeveloperMenuOpen ? (
+                  <ChevronUp size={16} className="text-gray-500 dark:text-gray-400" />
+                ) : (
+                  <ChevronDown size={16} className="text-gray-500 dark:text-gray-400" />
+                ))}
+            </button>
+
+            {!collapsed && isDeveloperMenuOpen && (
+              <div className="space-y-1">
+                {[
+                  { path: '/developer-productivity/overview', label: 'Overview' },
+                  { path: '/developer-productivity/commits', label: 'Commits Analytics' },
+                  { path: '/developer-productivity/attendance', label: 'Attendance Insights' },
+                  { path: '/developer-productivity/hours', label: 'Work Hours Tracking' },
+                  { path: '/developer-productivity/performance', label: 'Performance Score' },
+                ].map((item) => (
+                  <NavLink
+                    key={item.path}
+                    to={item.path}
+                    className={({ isActive }) =>
+                      clsx(
+                        'sidebar-link text-sm',
+                        'pl-9 pr-4',
+                        isActive
+                          ? 'active border-l-2 border-indigo-500 rounded-l-none'
+                          : '',
+                      )
+                    }
+                  >
+                    <span className="font-medium">{item.label}</span>
+                  </NavLink>
+                ))}
+              </div>
+            )}
+          </div>
         </nav>
 
         {!collapsed && (

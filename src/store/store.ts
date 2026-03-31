@@ -5,6 +5,7 @@ import { projectsApi } from './api/projectsApi';
 import { activityApi } from './api/activityApi';
 import { reportsApi } from './api/reportsApi';
 import { notificationsApi } from './api/notificationsApi';
+import { developerProductivityApi } from './api/developerProductivityApi';
 import themeReducer from './slices/themeSlice';
 import authReducer from './slices/authSlice';
 
@@ -18,6 +19,7 @@ export const store = configureStore({
     [activityApi.reducerPath]: activityApi.reducer,
     [reportsApi.reducerPath]: reportsApi.reducer,
     [notificationsApi.reducerPath]: notificationsApi.reducer,
+    [developerProductivityApi.reducerPath]: developerProductivityApi.reducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(
@@ -27,6 +29,7 @@ export const store = configureStore({
       activityApi.middleware,
       reportsApi.middleware,
       notificationsApi.middleware,
+      developerProductivityApi.middleware,
     ),
 });
 
